@@ -8,9 +8,9 @@ const flightSchema = new Schema({
         enum: ['American', 'Southwest', 'United']
     },
     airport: {
-        type: String, 
-        defualt: 'DEN', 
-        enum:['AUS', 'DFW', 'DEN', 'LAX', 'SAN']
+        type: String,
+        defualt: 'DEN',
+        enum: ['AUS', 'DFW', 'DEN', 'LAX', 'SAN']
     },
     flightNo: {
         type: Number,
@@ -20,18 +20,16 @@ const flightSchema = new Schema({
     },
     departs: {
         type: Date,
-        defualt: addOneYear(Date.now())
+        defualt: function () {
+            const currDate = new Date();
+            return currDate.setFullYear(currDate.getFullYear() + 1);
+        }
     }
 }, {
     timestamps: true
 });
 
-function addOneYear(date) {
-    const currDate = new Date(date);
-    currDate.setFullYear(currDate.getFullYear() + 1);
-    return currDate;
-  }
-  
+
 
 // Compile the schema into a model and export it
 module.exports = mongoose.model('Flight', flightSchema);
