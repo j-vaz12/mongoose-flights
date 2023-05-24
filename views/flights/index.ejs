@@ -13,11 +13,13 @@
   </thead>
   <tbody>
     <% flights.forEach(function(f) { %>
-      <tr>
+      <tr style="<%= f.departs < new Date() ? "color: red" : "color: black" %>">
         <td><%= f.airline %></td>
         <td><%= f.airport %></td>
         <td><%= f.flightNo %></td>
         <td><%= f.departs %></td>
+        <td><%= f._id %></td>
+        <td><a href="/flights/<%= f._id %>"> Detail</a></td>
       </tr>
     <% }); %>
   </tbody>

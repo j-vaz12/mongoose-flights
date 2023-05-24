@@ -4,7 +4,12 @@ module.exports = {
     index,
     new: newFlight,
     create,
+    show
 }
+  async function show(req, res) {
+    const flight = await Flight.findById(req.params.id);
+    res.render('flights/show', { flight })
+  } 
 
 async function create(req, res) {
     for (let key in req.body) {
@@ -26,5 +31,6 @@ function newFlight(req, res) {
 
 async function index(req, res) {
     const flights = await Flight.find({});
+    flights.sort((first, second) => first.departs - second.departs)
     res.render('flights/index', { flights })
 }
