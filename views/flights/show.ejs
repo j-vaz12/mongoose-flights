@@ -5,20 +5,10 @@
 <h3><%= flight.flightNo %></h3>
 <h3><%= flight.departs %></h3>
 
-<!-- <form action="/flights/ <%= flight._id %>/destination" method="POST">
-    <label> Airport </label>
-    <textarea name="content"></textarea>
-    <label>arrival</label>
-    <select name="Date" id="">
-        <option value=""></option>
-    </select>
-</form> -->
-
-
 <br><br><h2>Add destination</h2>
 <form method="POST"
   action="/flights/<%= flight._id %>/destinations">
-  <label>airport:</label>
+  <label>airport:
   <select name="airport">
     <option value="AUS">AUS</option>
     <option value="DFW">DFW</option>
@@ -26,9 +16,11 @@
     <option value="LAX">LAX</option>
     <option value="SAN">SAN</option>
   </select>
-  <label>arrival:</label>
-      <input type="datetime-local"  value="arrival">
-      <input type="submit" value="Add Arrival">
+</label>
+  <label>arrival:
+  <input type="datetime-local"  name="arrival"> 
+  </label>
+  <input type="submit" value="Add Arrival">
 </form>
 
 <% if (flight.destinations.length) { %>
@@ -51,6 +43,15 @@
 <% } else { %>
   <h5>No Destinations Yet</h5>
 <% } %>
+<label for="">
+<a href="/flights/<%= flight._id %>/tickets/new"> add a ticket</a>
+</label>
+<h1>Ticket</h1>
+
+  <% tickets.forEach(function(t) { %>
+  <p><%= t.seat %></p>
+   <p><%= t.price %>$</p>
+  <% }) %>
 
 
 <%- include('../partials/footer') %>
